@@ -1,0 +1,45 @@
+# Controlled-access clinical data and derived samples
+/data/
+/datasets/
+/raw_data/
+/clinical_data/
+/artifacts/
+/outputs/
+/results/
+/checkpoints/
+/weights/
+/cache/
+*.npz
+*.npy
+*.parquet
+*.feather
+*.h5
+*.hdf5
+*.pth
+*.pt
+*.ckpt
+*.pkl
+*.pickle
+*.joblib
+*.sqlite
+*.db
+*.csv
+*.tsv
+*.jsonl
+*.sql.gz
+*.csv.gz
+*.tar.gz
+*.zip
+# Secrets and local configuration
+.env
+.env.*
+*.key
+*.pem
+credentials.json
+**/token.json
+# Runtime artifacts
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+.pytest_cache/
+.DS_Store

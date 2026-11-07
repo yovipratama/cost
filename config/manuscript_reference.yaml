@@ -1,0 +1,68 @@
+# DOCUMENTATION ONLY. These are values reported in manuscript IEEE_ACCESS_FINAL_1043.docx.
+# Do not automatically override original notebook constants with this YAML.
+# Any discrepancy must be traced to the actual experiment and logged, not silently changed.
+source_manuscript: IEEE_ACCESS_FINAL_1043.docx
+study:
+  dataset: MIMIC-IV v2.1
+  external_dataset: eICU-CRD
+  population: adult heart-failure ICU admissions
+  outcome: in-hospital mortality
+  observation_hours: 48
+  temporal_measured_features: 31
+  temporal_improved_dimensions: 93
+  static_features: 11
+  data_split:
+    train: '2008-2015'
+    validation: '2016-2017'
+    test: '2018-2019'
+  initial_seeds: [42, 43, 44, 45, 46]
+  improved_seeds: [42, 43, 44]
+initial_cost:
+  optimizer: Adam
+  lr_scheduler: CosineAnnealingLR
+  loss: weighted_BCE
+  sampler: WeightedRandomSampler
+  mixed_precision: true
+  model_runs: 5
+improved_cost:
+  optimizer: AdamW
+  learning_rate: 0.0003
+  weight_decay: 0.0001
+  scheduler: OneCycleLR
+  warmup_fraction: 0.10
+  batch_size: 64
+  max_epochs: 120
+  early_stopping_patience: 15
+  gradient_clip_norm: 1.0
+  hidden_size: 256
+  lstm_layers: 2
+  bidirectional: true
+  attention_heads: 4
+  attention_dim: 128
+  salience_hidden_dim: 128
+  dropout: 0.3
+  stochastic_depth_drop_path: 0.1
+  sparsity_threshold: 0.5
+  sparsity_penalty_lambda: 0.0005
+  focal_gamma: 2.0
+  focal_alpha: 0.75
+  label_smoothing: 0.05
+  r_drop_alpha: 4.0
+  snapshot_ensemble_checkpoints: 5
+  inactive_latent_multiplier: 0.1
+  seeds: [42, 43, 44]
+preprocessing_reported:
+  vital_forward_fill_max_hours: 6
+  laboratory_imputation: MICE
+  mice_max_iter: 5
+  mice_nearest_features: 10
+  residual_missing: zero_fill
+  normalization: train_only_zscore
+  min_vital_observations: 6
+  min_laboratory_observations: 2
+metrics:
+  discrimination: [AUROC, AUPRC]
+  calibration: [Brier, ECE]
+  operating_point: sensitivity_at_90_percent_specificity
+  complexity: [parameter_count, FLOPs, inference_latency, memory]
+  paired_tests: [DeLong, patient_level_stratified_bootstrap]
