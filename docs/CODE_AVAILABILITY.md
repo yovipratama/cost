@@ -1,9 +1,11 @@
-# Suggested code-availability text for the publication
+# Code availability
 
-Only after the GitHub repository is public and reviewed, replace `<YOUR_ACCOUNT>` with the **actual** account name:
+- Repository: https://github.com/yovipratama/cost
+- Version associated with the manuscript: release `v1.0` — https://github.com/yovipratama/cost/tree/v1.0
+- License: MIT (code and documentation only; see `LICENSE`)
 
-> The source notebooks and experimental configurations supporting this study are available at https://github.com/<YOUR_ACCOUNT>/COST-Clinical-Sparse-Temporal-Modeling. MIMIC-IV and eICU-CRD are not redistributed; authorized access must be obtained separately through PhysioNet.
+Suggested code-availability statement for the publication:
 
-If full end-to-end reproducibility has **not** been established, prefer **"source notebooks and experimental configurations"** instead of **"fully reproducible code"**.
+> The source notebooks and experimental configurations supporting this study are available at https://github.com/yovipratama/cost (release v1.0). MIMIC-IV and eICU-CRD are not redistributed; authorized access must be obtained separately through PhysioNet.
 
-After creating a stable release, additionally archive/tag a version and include a permalink to that release if appropriate.
+Full end-to-end reproducibility has **not** been independently certified (see `README.md` and `docs/REPRODUCIBILITY.md`), so the statement uses **"source notebooks and experimental configurations"** rather than **"fully reproducible code"**.

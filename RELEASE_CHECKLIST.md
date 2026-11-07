@@ -10,5 +10,6 @@
 - [ ] Author verifies whether Table VIII fully describes Improved checkpoint preprocessing and adjusts paper claims if needed.
 - [ ] Author verifies controlled-access clinical files and saved artifact paths in own environment.
 - [x] Explicit LICENSE added (MIT; covers code and documentation only, not the clinical datasets).
-- [ ] Author publishes repository and uses the real URL in IEEE Access Code Availability.
+- [x] Repository published at https://github.com/yovipratama/cost (release v1.0).
+- [ ] Author uses the real URL in the IEEE Access Code Availability section of the manuscript.
 - [ ] Optional: author tests fresh authorized runtime to certify full reproducibility; not required for source-code disclosure.
