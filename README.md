@@ -38,4 +38,4 @@ Source notebooks and disclosed configs can be inspected without protected data. 
 
 ## Integrity and privacy
 
-Run `python tools/audit_repository.py` to check notebook validity, output stripping, and source-reference issues. See `docs/PRIVACY_CHECK.md` before publication. The repository does not grant a license automatically; authors should add an appropriate license after rights review. For citation, use the GitHub repository's real public URL and ideally a fixed release/tag; do not fill a fictional URL in the manuscript.
+Run `python tools/audit_repository.py` to check notebook validity, output stripping, and source-reference issues. See `docs/PRIVACY_CHECK.md` before publication. The source code and documentation are released under the MIT License (see `LICENSE`). The license covers this repository only; MIMIC-IV and eICU-CRD remain governed by their PhysioNet credentialed data use agreements and are not redistributed. For citation, use the GitHub repository's real public URL and ideally a fixed release/tag; do not fill a fictional URL in the manuscript.

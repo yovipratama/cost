@@ -9,6 +9,6 @@
 - [x] Important preprocessing divergence documented without changing published experiment code.
 - [ ] Author verifies whether Table VIII fully describes Improved checkpoint preprocessing and adjusts paper claims if needed.
 - [ ] Author verifies controlled-access clinical files and saved artifact paths in own environment.
-- [ ] Author checks third-party code licensing and selects an explicit LICENSE if appropriate.
+- [x] Explicit LICENSE added (MIT; covers code and documentation only, not the clinical datasets).
 - [ ] Author publishes repository and uses the real URL in IEEE Access Code Availability.
 - [ ] Optional: author tests fresh authorized runtime to certify full reproducibility; not required for source-code disclosure.
