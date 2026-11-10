@@ -1,41 +1,49 @@
-# COST — Controlled Sparsity for Clinical Time-Series Modeling
+# COST — Controlled Sparsity for Reliable Clinical Time-Series Modeling
 
-Code and analysis notebooks associated with the accepted IEEE Access article **“COST: Controlled Sparsity for Reliable Clinical Time-Series Modeling: A Trade-off Analysis in ICU Mortality Prediction.”**
+**Research code corresponding to:** *COST: Controlled Sparsity for Reliable Clinical Time-Series Modeling: A Trade-off Analysis in ICU Mortality Prediction* (IEEE Access, accepted manuscript).
 
-## Scope
-This is a **source-code and protocol release**, organized by scientific experiment rather than editorial revision history. Eight notebooks are provided without executed outputs. No MIMIC-IV/eICU-CRD patient records, per-patient predictions, trained weights, or credentials are distributed.
+This repository is organized according to the **paper's Methods and experimental Results**, not the journal revision history. Its scope is restricted to the reported experiments. **Initial COST**, although it performs poorly, is intentionally included because its failure and sparsity diagnosis are central reported findings. Earlier unused trials are excluded.
 
-**Data access:** Both clinical datasets require independent authorization through [PhysioNet](https://physionet.org/). Follow `docs/DATA_ACCESS.md`. Access restrictions do not require distributing patient data.
+## Notebook order and reported experiment coverage
 
-## Study workflow and notebooks
+| Notebook | Manuscript experiment |
+|---|---|
+| `01_cohort_baselines_and_initial_cost.ipynb` | Cohort, LR/RF/LSTM/Attention LSTM/TCN baselines, Initial COST, initial ablation, efficiency, gradient attribution, feature retention and Table XX threshold sweep |
+| `02_cost_improved_training_and_ablation.ipynb` | Improved COST, training, multi-seed snapshot ensemble, model and optimization ablations |
+| `03_gating_on_off_control.ipynb` | Architecture-matched gating ON/OFF and binary-mask sparsity |
+| `04_trained_random_mask_control.ipynb` | Independently trained random-mask comparator |
+| `05_temporal_calibration_and_interventions.ipynb` | 48-hour mortality sensitivity, calibration, frozen checkpoint gate interventions, ON/OFF statistics |
+| `06_external_eicu_validation.ipynb` | Frozen MIMIC-trained model evaluated on eICU, descriptive external calibration |
+| `07_paired_statistical_tests.ipynb` | Paired DeLong and patient-level stratified bootstrap for learned vs trained random-mask |
+| `08_saved_checkpoint_prediction_reconstruction.ipynb` | Recover single-model and five-snapshot test predictions from saved original checkpoints |
 
-| Notebook | Research objective | Prerequisites |
-|---|---|---|
-| `01_cohort_baselines_initial_cost_and_improved_model.ipynb` | Dataset processing, conventional baselines, Initial COST, Improved COST, ablations and statistics | Authorized preprocessed MIMIC cache / raw data as expected by the notebook |
-| `02_architecture_matched_gating_training.ipynb` | Architecture-matched gating experiments and independent runs | MIMIC cache and defined model components |
-| `03_controlled_gating_isolation.ipynb` | Controlled gating ON/OFF | Uses definitions/runtime state from the relevant Improved COST setup; see notebook preflight |
-| `04_external_validation_eicu.ipynb` | Frozen-model external validation | Authorized eICU-CRD files, previously trained frozen checkpoint and MIMIC training preprocessing statistics |
-| `05_independently_trained_sparse_control_and_domain_shift.ipynb` | Trained random-mask comparator, domain shift | Authorized clinical files and saved model artifacts |
-| `06_experimental_diagnostics_and_validation_audits.ipynb` | Model/metric, FLOPs, artifact provenance checks | Original model artifacts; some optional discovery cells scan a local research folder |
-| `07_calibration_temporal_and_gating_analyses.ipynb` | Calibration, 48-hour sensitivity, mask intervention and paired analyses | Saved, aligned predictions/identifiers and optional checkpoints |
-| `08_paired_statistical_significance.ipynb` | Patient-paired DeLong/bootstrap, learned vs trained random | Aligned prediction arrays for seeds 42–44; **no training** |
+Notebooks 03–07 may depend on **outputs from preceding experiments** and/or original saved checkpoints. The presence of code does not imply automatic reproduction of numerical results from a clean environment. See `docs/EXECUTION_ORDER.md` and `docs/PAPER_CODE_AUDIT.md`.
 
-**Execution:** these are complementary experiment notebooks, **not** eight serial one-click stages. See `docs/EXECUTION_GUIDE.md` and `docs/EXPERIMENT_PROTOCOL.md`. To use Colab, copy the notebooks and authorized files into your own Drive, then change the `COST_PROJECT` base path in setup cells. Never commit your Drive's clinical files.
+## Data access and privacy
 
-## Core reference parameters
+MIMIC-IV v2.1 and eICU-CRD are controlled-access clinical databases. They are **not redistributed** here. Users must independently obtain appropriate access and comply with PhysioNet credentialing, training and data-use requirements:
 
-- 48-hour observation window; 31 original temporal and 11 static variables; Improved model reports 93 temporal channels after adding missingness and delta-time features.
-- MIMIC-IV chronological splits: 2008–2015 train, 2016–2017 validation, 2018–2019 test. No subject overlap.
-- Initial COST: five seeds 42–46. Improved COST: three seeds 42–44.
-- Improved COST: AdamW, learning rate 3e-4, weight decay 1e-4, batch 64, up to 120 epochs, patience 15, two-layer bidirectional LSTM hidden size 256, four attention heads, dropout 0.3, fixed gate τ=0.5, snapshot ensemble of five checkpoints.
-- Masked dimensions are **attenuated to 10%**, not hard-removed; reported binary latent sparsity is not hardware speedup.
+- MIMIC-IV v2.1: https://physionet.org/content/mimiciv/2.1/
+- eICU-CRD v2.0: https://physionet.org/content/eicu-crd/2.0/
 
-A complete **paper-to-code target checklist** is in `docs/MANUSCRIPT_CODE_MATRIX.md`. `config/manuscript_reference.yaml` is **documentation only**; do not mistake it for a configuration automatically loaded by original research notebooks.
+No individual patient records, cached arrays, passwords, saved test predictions or model checkpoints are included in this release. Users must configure their authorized storage locations in the notebook setup cells.
 
-## Honest reproducibility statement
+## Environment
 
-Source notebooks and disclosed configs can be inspected without protected data. Re-execution requires approved access and, for follow-on analyses, the saved checkpoints/prediction artifacts from earlier experiments. Original notebooks include exploratory cells; a historical audit cell that only opened an unavailable old notebook was removed in four instances (see `docs/CHANGE_LOG.md`). **No training, model architecture, loss, or metric computation cell was modified by this packaging step.** Some originally executed preprocessing paths differ between Initial and Improved COST; they are preserved unchanged for scientific provenance (`docs/PREPROCESSING_PROVENANCE.md`). Consequently, this release is **not certified to regenerate every published number from a fresh machine** until authors verify access and run their original assets.
+The experiments were developed in Python/PyTorch on Google Colab with NVIDIA A100 GPU, as described in the paper. Install the Python packages from `requirements.txt`; for Colab, follow each notebook's setup cell. Checkpoint and full-dataset validation are not possible without authorized data and the original saved weights.
 
-## Integrity and privacy
+## Methodology and reproducibility notes
 
-Run `python tools/audit_repository.py` to check notebook validity, output stripping, and source-reference issues. See `docs/PRIVACY_CHECK.md` before publication. The source code and documentation are released under the MIT License (see `LICENSE`). The license covers this repository only; MIMIC-IV and eICU-CRD remain governed by their PhysioNet credentialed data use agreements and are not redistributed. For citation, use the GitHub repository's real public URL and ideally a fixed release/tag; do not fill a fictional URL in the manuscript.
+- The source is derived from supplied research notebooks. It includes notebook-based implementations rather than a newly written and untested library.
+- `config/paper_protocol.yaml` records the manuscript's parameters **for reference**; it does not override notebook variables.
+- `docs/SOURCE_PROVENANCE.tsv` records which historical code was selected and the research reason.
+- `docs/PAPER_CODE_AUDIT.md` flags implementation–description differences that must not be misrepresented as verified equality.
+- Static code compilation is not the same as successful data-dependent end-to-end execution. No output numbers are fabricated.
+
+## Citation
+
+Please cite the COST paper when using this code (final IEEE Xplore bibliographic information to be added once available), together with the MIMIC-IV and eICU-CRD dataset citations listed in `docs/DATA_ACCESS.md`. Repository: https://github.com/yovipratama/cost — see `docs/CODE_AVAILABILITY.md`.
+
+## License
+
+The source notebooks and documentation are released under the MIT License (see `LICENSE`). The license covers this repository only; MIMIC-IV and eICU-CRD remain governed by their PhysioNet credentialed data use agreements and are not redistributed. Dependencies retain their own terms.

@@ -1,0 +1,9 @@
+public_notebook	primary_source	paper_use	additional_source	additional_paper_use
+01_cohort_baselines_and_initial_cost.ipynb	COST_Master_AllExperiments_CLEAN (4)(2).ipynb	cohort; baseline; Initial COST; ablation; efficiency	DS_RNN_MIMIC_IV_Mortality_Prediction(20261107-080328).ipynb	clinical attribution; feature pruning; tau sweep
+02_cost_improved_training_and_ablation.ipynb	COST_Master_AllExperiments_CLEAN (4)(2).ipynb	Improved COST; snapshot ensemble; ablation	DS_RNN_v2_Improvements (2)(1).ipynb	architecture/training source cross-check
+03_gating_on_off_control.ipynb	COST_RevisionII_FINAL_SelfContained (1).ipynb	gating OFF/ON		
+04_trained_random_mask_control.ipynb	COST_Reviewer2_Targeted_Experiments_FINAL (2).ipynb	trained random mask		
+05_temporal_calibration_and_interventions.ipynb	COST_Reviewer2_Final_Audits (1).ipynb	temporal; calibration; intervention		
+06_external_eicu_validation.ipynb	COST_eICU_EXTERNAL_FINAL_CORRECTED (2).ipynb	frozen external validation		
+07_paired_statistical_tests.ipynb	COST_Reviewer2_Significance_NoRetraining.ipynb	paired tests		
+08_saved_checkpoint_prediction_reconstruction.ipynb	regenerate_cost_improved_predictions(2).ipynb	checkpoint predictions		

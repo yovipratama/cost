@@ -1,20 +1,12 @@
-# Scientific stack inferred from source notebook imports and in-notebook pip installs.
-# Versions are intentionally not pinned: the exact original Colab environment lockfile was not preserved.
+# Packages imported or pip-installed by the notebooks (versions not pinned; original Colab lockfile not preserved).
 numpy
 pandas
 scipy
 scikit-learn
 imbalanced-learn
-matplotlib
-seaborn
 torch
 torchmetrics
-tqdm
-joblib
-requests
-pyarrow          # pandas.read_parquet in notebook 02
-thop             # FLOPs/MAC profiling (notebook 06)
-fvcore           # optional FLOPs cross-check (notebook 06)
-jupyter
-nbformat
+matplotlib
+seaborn
 PyYAML
+jupyter

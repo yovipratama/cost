@@ -1,15 +1,16 @@
-# GitHub public release checklist
+# Publication source checklist
 
-- [x] Scientific notebook names; no journal response file names.
-- [x] Output and execution counts removed.
-- [x] Colab account metadata (display name, userId, timestamps) removed from notebook cells.
-- [x] Four unrelated historical source-inspection cells removed; details logged.
-- [x] No patient files, prediction arrays, raw data, weights or tokens packaged.
-- [x] Environment / restricted access instructions present.
-- [x] Important preprocessing divergence documented without changing published experiment code.
-- [ ] Author verifies whether Table VIII fully describes Improved checkpoint preprocessing and adjusts paper claims if needed.
-- [ ] Author verifies controlled-access clinical files and saved artifact paths in own environment.
-- [x] Explicit LICENSE added (MIT; covers code and documentation only, not the clinical datasets).
-- [x] Repository published at https://github.com/yovipratama/cost (release v1.0).
-- [ ] Author uses the real URL in the IEEE Access Code Availability section of the manuscript.
-- [ ] Optional: author tests fresh authorized runtime to certify full reproducibility; not required for source-code disclosure.
+- [x] Baseline LR/RF/LSTM/Attention LSTM/TCN + Initial COST included.
+- [x] Improved COST core architecture, training and ablations included.
+- [x] Initial clinical gradient attribution, per-feature pruning, and threshold sweep included from source.
+- [x] Gating, trained sparse random control, validation, calibration, statistical tests covered.
+- [x] Snapshot prediction reconstruction helper included.
+- [x] No notebook outputs or execution counts.
+- [x] No clinical dataset, prediction vectors, or model checkpoint in the repository archive.
+- [ ] Run against original authorized clinical data and checkpoints if claiming full numerical reproducibility.
+- [ ] Verify implementation–manuscript MICE/missingness and cohort issues in `docs/PAPER_CODE_AUDIT.md` before presenting code as *exactly* the method described by the manuscript.
+- [ ] Replace local Colab Drive paths and ensure authorized users can configure private data storage.
+- [x] Colab account metadata (display name, userId, timestamps) removed from notebook cells; personal Drive folder name replaced by `COST_PROJECT`.
+- [x] MIT LICENSE added (code and documentation only, not the clinical datasets).
+- [x] Repository published at https://github.com/yovipratama/cost.
+- [ ] Replace the manuscript Code Availability placeholder with the verified URL.

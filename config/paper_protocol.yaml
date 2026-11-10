@@ -1,0 +1,55 @@
+# Reference protocol transcribed from the manuscript; historical notebook CONFIG remains authoritative for its run.
+# Reference values transcribed from IEEE_ACCESS_FINAL_1043.docx.
+# This file is a documentation cross-check, NOT a replacement for the source notebook configurations.
+data:
+  mimic_iv_version: '2.1'
+  eicu_crd_version: '2.0'
+  observation_hours: 48
+  temporal_variables: 31
+  improved_temporal_channels: 93
+  static_variables: 11
+  patient_age_min_years: 18
+  icu_los_min_hours_exclusive: 24
+  minimum_observed_vital: 6
+  minimum_observed_laboratory: 2
+  train_years: [2008, 2015]
+  validation_years: [2016, 2017]
+  test_years: [2018, 2019]
+initial_cost:
+  optimizer: Adam
+  scheduler: CosineAnnealingLR
+  loss: weighted_BCE
+  sampling: WeightedRandomSampler
+  seeds: [42, 43, 44, 45, 46]
+improved_cost:
+  optimizer: AdamW
+  learning_rate: 0.0003
+  weight_decay: 0.0001
+  scheduler: OneCycleLR
+  warmup_fraction: 0.10
+  batch_size: 64
+  max_epochs: 120
+  early_stopping_patience: 15
+  gradient_clip: 1.0
+  hidden_size: 256
+  bilstm_layers: 2
+  attention_heads: 4
+  attention_dimension: 128
+  salience_hidden_size: 128
+  dropout: 0.3
+  stochastic_depth: 0.1
+  gating_threshold: 0.5
+  residual_inactive_multiplier: 0.1
+  sparsity_loss_weight: 0.0005
+  focal_gamma: 2.0
+  focal_alpha: 0.75
+  label_smoothing: 0.05
+  rdrop_alpha: 4.0
+  snapshot_count: 5
+  seeds: [42, 43, 44]
+evaluation:
+  classification_metrics: [AUROC, AUPRC, Brier_score, sensitivity_at_90pct_specificity]
+  calibration_metrics: [ECE]
+  comparative_tests: [paired_DeLong, stratified_paired_patient_bootstrap]
+  efficiency_metrics: [parameters, FLOPs, memory, latency]
+  eicu_retraining: false

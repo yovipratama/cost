@@ -1,21 +1,18 @@
-# Controlled access to clinical data
+# Access to clinical datasets
 
-The paper uses **MIMIC-IV v2.1** and **eICU-CRD**. These contain controlled-access clinical information and **are not distributed in this repository**.
+- MIMIC-IV v2.1: https://physionet.org/content/mimiciv/2.1/
+- eICU-CRD v2.0: https://physionet.org/content/eicu-crd/2.0/
 
-1. Request the required credentialed access to the relevant databases through [PhysioNet](https://physionet.org/).
-2. Complete required identity verification, training/certification, agreements, and project-specific access procedures as applicable under current PhysioNet terms.
-3. Download and store the databases only in an authorized environment. Do not commit raw files, extracts, patient identifiers, row-level predictions, checkpoints derived from sensitive data, API keys, or login credentials.
-4. The code may require a preprocessing cache prepared from legally accessed data. Adjust paths locally and comply with the applicable data-use agreements.
+Both contain controlled-access clinical data. Obtain appropriate PhysioNet access and complete required training/data-use agreements. Do not commit databases, patient-level cache files, predictions, checkpoints containing patient data, credentials, or exported rows.
 
-The code-release repository alone is **not sufficient** to execute full-scale clinical experiments without authorized access.
+This repository does not redistribute any dataset, and the absence of those files is intentional.
 
-## Dataset versions, links and citations
+## Dataset versions, DOIs and citations
 
 | Dataset | Version used | PhysioNet page | Dataset DOI | Access |
 |---|---|---|---|---|
 | MIMIC-IV | 2.1 | https://physionet.org/content/mimiciv/2.1/ | https://doi.org/10.13026/rrgf-xw32 | Credentialed (DUA + CITI training) |
 | eICU-CRD | 2.0 | https://physionet.org/content/eicu-crd/2.0/ | https://doi.org/10.13026/C2WM1R | Credentialed (DUA + CITI training) |
-| eICU-CRD Demo (pipeline check only, `DATASET_MODE='DEMO'` in notebook 04) | 2.0.1 | https://physionet.org/content/eicu-crd-demo/2.0.1/ | https://doi.org/10.13026/4mxk-na84 | Open (ODbL) |
 
 Please cite the datasets as requested by PhysioNet:
 
